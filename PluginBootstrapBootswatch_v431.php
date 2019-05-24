@@ -40,6 +40,15 @@ class PluginBootstrapBootswatch_v431{
      */
     $element = array();
     $element[] = wfDocument::createHtmlElement('link', null, array('href' => '/plugin/bootstrap/bootswatch_v431/'.strtolower($data['data']['theme']).'/bootstrap.min.css', 'rel' => 'stylesheet'));
+    /**
+     * Placeholder.
+     */
+    if(strtolower($data['data']['theme'])=='spacelab'){
+      $element[] = wfDocument::createHtmlElement('style', ".form-control::-webkit-input-placeholder{color:#777;opacity:0.4}.form-control::-ms-input-placeholder{color:#777;opacity:0.4}.form-control::placeholder{color:#777;opacity:0.4}");
+    }
+    /**
+     * 
+     */
     wfDocument::renderElement($element);
   }
   public static function widget_selectbox($data){
