@@ -1,6 +1,7 @@
 <?php
 class PluginBootstrapBootswatch_v431{
   public static function widget_include($data){
+    $data = new PluginWfArray($data);
     /**
      * Set other theme in session via querystring.
      */
@@ -20,12 +21,12 @@ class PluginBootstrapBootswatch_v431{
       /**
        * If set in Session.
        */
-      $data['data']['theme'] = $_SESSION['plugin']['bootstrap']['bootswatch_v431']['theme'];
-    }elseif(!isset($data['data']['theme'])){
+      $data->set('data/theme', $_SESSION['plugin']['bootstrap']['bootswatch_v431']['theme']);
+    }elseif(!$data->get('data/theme')){
       /**
        * If not set in widget we set Cerulean as default theme.
        */
-      $data['data']['theme'] = 'Cerulean';
+      $data->set('data/theme', 'Cerulean');
     }else{
       /**
        * The theme is not in session and is set in widget.
@@ -34,17 +35,23 @@ class PluginBootstrapBootswatch_v431{
     /**
      * Set current theme to pic upp in selectbox widget.
      */
-    wfArray::set($GLOBALS, 'sys/settings/plugin/bootstrap/bootswatch_v431/current_theme', $data['data']['theme']);
+    wfArray::set($GLOBALS, 'sys/settings/plugin/bootstrap/bootswatch_v431/current_theme', $data->get('data/theme'));
     /**
      * Create element and render.
      */
     $element = array();
-    $element[] = wfDocument::createHtmlElement('link', null, array('href' => '/plugin/bootstrap/bootswatch_v431/'.strtolower($data['data']['theme']).'/bootstrap.min.css', 'rel' => 'stylesheet'));
+    $element[] = wfDocument::createHtmlElement('link', null, array('href' => '/plugin/bootstrap/bootswatch_v431/'.strtolower($data->get('data/theme')).'/bootstrap.min.css', 'rel' => 'stylesheet'));
     /**
-     * Placeholder.
+     * Spacelab fix
      */
-    if(strtolower($data['data']['theme'])=='spacelab'){
+    if(strtolower($data->get('data/theme'))=='spacelab'){
       $element[] = wfDocument::createHtmlElement('style', ".form-control::-webkit-input-placeholder{color:#777;opacity:0.4}.form-control::-ms-input-placeholder{color:#777;opacity:0.4}.form-control::placeholder{color:#777;opacity:0.4}");
+    }
+    /**
+     * Cerulean fix
+     */
+    if(strtolower($data->get('data/theme'))=='cerulean'){
+      $element[] = wfDocument::createHtmlElement('style', "h1,h2,h3,h4,h5,h6{color:#495057} .navbar button{margin-right:5px} ");
     }
     /**
      * 

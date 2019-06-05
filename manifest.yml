@@ -1,5 +1,8 @@
-version: '1.0'
+version: '1.1'
 history:
+  '1.1':
+    date: '2019-06-05'
+    description: 'Add css for Cerulean.'
   '1.0':
     date: '2019-03-08'
     description: 'Manifest created.'
