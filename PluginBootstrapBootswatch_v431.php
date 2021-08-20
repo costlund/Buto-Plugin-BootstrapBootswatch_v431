@@ -81,7 +81,7 @@ class PluginBootstrapBootswatch_v431{
       if($value == $current_theme){
         $attribute = array_merge($attribute, array('selected' => 'selected'));
       }
-      $option[] = wfDocument::createHtmlElement('option', $value, $attribute);
+      $option[] = wfDocument::createHtmlElement('option', $value, $attribute, array('i18n' => false));
     }
     $select->set('innerHTML', $option);
     /**
